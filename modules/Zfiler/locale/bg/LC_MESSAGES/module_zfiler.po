@@ -1,0 +1,891 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Zikula module\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-03-07 20:30+0000\n"
+"PO-Revision-Date: 2015-03-07 22:32+0200\n"
+"Last-Translator: N.Petkov <nik@osi.bg>\n"
+"Language-Team: www.cmstory.com <office@cmstory.com>\n"
+"Language: bg_BG\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.7.4\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: modules/Zfiler/lib/Zfiler/Version.php:13
+msgid "System tools"
+msgstr "Системни инструменти"
+
+#. !module name that appears in URL
+#: modules/Zfiler/lib/Zfiler/Version.php:14
+msgid "zfiler"
+msgstr "zfiler"
+
+#: modules/Zfiler/lib/Zfiler/Version.php:15
+msgid "System tools and code execution."
+msgstr "Системни инструменти и изпълнение на код."
+
+#: modules/Zfiler/lib/Zfiler/Version.php:27
+msgid "Zfiler hooks"
+msgstr "Zfiler куки"
+
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:22
+msgid "Server"
+msgstr "Сървър"
+
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:28
+msgid "Client"
+msgstr "Клиент"
+
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:34
+#: modules/Zfiler/templates/admin/backupdb.tpl:6
+msgid "Backup"
+msgstr "Архивиране"
+
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:40
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:97
+#: modules/Zfiler/templates/admin/scripts.tpl:13
+msgid "Scripts"
+msgstr "Скриптове"
+
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:46
+msgid "Settings"
+msgstr "Настройки"
+
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:52
+msgid "Wiki"
+msgstr "Помощ"
+
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:65
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:302
+#: modules/Zfiler/lib/Zfiler/Api/Backup.php:76
+msgid "Error! File name can not be empty."
+msgstr "Грешка! Името на файла не може да бъде празно."
+
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:68
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:305
+#, php-format
+msgid "Error! File %s already exist."
+msgstr "Грешка! Файл %s вече съществува."
+
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:74
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:153
+#: modules/Zfiler/lib/Zfiler/Api/Backup.php:228
+#, php-format
+msgid "Error! Can not create file %s."
+msgstr "Грешка! Не може да се създаде файл %s."
+
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:80
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:158
+#, php-format
+msgid "Error! Can not write to file %s."
+msgstr "Грешка! Не може да се записва във файл %s."
+
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:100
+#: modules/Zfiler/lib/Zfiler/Api/Backup.php:208
+#: modules/Zfiler/lib/Zfiler/Api/Backup.php:373
+msgid "Error!"
+msgstr "Грешка!"
+
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:103
+#, php-format
+msgid "Result from: %s"
+msgstr "Резултат от: %s"
+
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:106
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:324
+#, php-format
+msgid "Error! File does not exist: %s"
+msgstr "Грешка! Файлът не съществува: %s"
+
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:165
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:357
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:571
+#, php-format
+msgid "Error! File %s can not be deleted."
+msgstr "Грешка! File %s не може да бъде изтрит."
+
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:283
+#, php-format
+msgid "Can not read from file %s."
+msgstr "Не може да се чете от файл %s."
+
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:287
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:360
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:574
+#, php-format
+msgid "File does not exist: %s"
+msgstr "Файлът не съществува: %s"
+
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:312
+#, php-format
+msgid "Done! Database backup is created in file %s."
+msgstr "Готово! Архив на базата данни е създаден във файл %s."
+
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:314
+#, php-format
+msgid "Error creating database backup in file %s."
+msgstr "Грешка при създаване на архив на базата данни във файл %s."
+
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:318
+#, php-format
+msgid "Size of created file is %s bytes."
+msgstr "Размер на създадения файл е %s байта."
+
+#: modules/Zfiler/lib/Zfiler/Api/Backup.php:99
+#, php-format
+msgid "Create backup start time: %s."
+msgstr "Създаване на архив начален час: %s."
+
+#: modules/Zfiler/lib/Zfiler/Api/Backup.php:132
+#, php-format
+msgid "Create backup end time: %s."
+msgstr "Създаване на архив краен час: %s."
+
+#: modules/Zfiler/lib/Zfiler/Api/Backup.php:132
+#, php-format
+msgid "Execution time: %s seconds."
+msgstr "Време за изпълнение: %s секунди."
+
+#: modules/Zfiler/lib/Zfiler/Api/Backup.php:171
+msgid "Status:"
+msgstr "Статус"
+
+#: modules/Zfiler/lib/Zfiler/Api/Backup.php:415
+msgid "Error! Can not obtain connection to database."
+msgstr "Грешка! Не може да се установи връзка с базата данни."
+
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:94
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:107
+#, php-format
+msgid "Directory exists: %s."
+msgstr "Директорията съществува:  %s."
+
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:97
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:110
+#, php-format
+msgid "Directory is created: %s."
+msgstr "Директорията е създадена: %s."
+
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:99
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:113
+#, php-format
+msgid "Can not create directory %s."
+msgstr "Не може да се създаде директория %s."
+
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:100
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:111
+msgid "Please create it manually, for example with FTP client."
+msgstr "Моля създайте го ръчно, например с FTP клиент."
+
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:121
+msgid "Done! Updated configuration."
+msgstr "Готово! Конфигурацията е запазена."
+
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:138
+msgid "Please specify in module settings directory for scripts to execute!"
+msgstr ""
+"Моля укажете в настройките на модула в коя директория са скриптовете за "
+"изпълнение!"
+
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:158
+msgid ""
+"Please visit module settings and create directory for scripts to execute!"
+msgstr ""
+"Моля посетете настройките на модула и създайте директорията, в която се "
+"поставят скриптовете за изпълнение!"
+
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:188
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:412
+#, php-format
+msgid "New file %s is created."
+msgstr "Новият файл %s е създаден."
+
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:202
+msgid "Done! Executed selected scripts."
+msgstr "Готово! Избраните скриптове са изпълнени."
+
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:205
+msgid "Please select scripts to execute!"
+msgstr "Моля изберете скрипт за изпълнение!"
+
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:355
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:569
+#, php-format
+msgid "File %s is deleted."
+msgstr "Файл %s е изтрит."
+
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:404
+msgid "Error! File name is empty."
+msgstr "Грешка! Името на файла е празно."
+
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:419
+#, php-format
+msgid "Error! Can not write content to file %s."
+msgstr "Грешка! Не може да се запише съдържанието във файл %s."
+
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:421
+#, php-format
+msgid "Done! File %s is saved."
+msgstr "Готово! Файл %s е запазен."
+
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:424
+#, php-format
+msgid "Error! File %s does not exist."
+msgstr "Грешка! Файл %s не съществува."
+
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:474
+msgid "Please specify in module settings directory for backups to store!"
+msgstr ""
+"Моля укажете в настройките на модула в коя директория ще се съхраняват "
+"архивите!"
+
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:489
+msgid "Please visit module settings and create directory for backups to store!"
+msgstr ""
+"Моля посетете настройките на модула и създайте директорията, в която ще се "
+"съхраняват архивите!"
+
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:584
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:596
+msgid "Please select a file from the list."
+msgstr "Моля изберете файл от списъка."
+
+#: modules/Zfiler/lib/Zfiler/Controller/Ajax.php:27
+msgid "No IP passed."
+msgstr "Няма подадено IP."
+
+#: modules/Zfiler/lib/Zfiler/Controller/Ajax.php:75
+msgid "Could not get info."
+msgstr "Не може да получи информацията."
+
+#: modules/Zfiler/templates/admin/ipinfo_ajax.tpl:1
+msgid "IP address information"
+msgstr "Информация за IP адрес"
+
+#: modules/Zfiler/templates/admin/ipinfo_ajax.tpl:4
+msgid "Close"
+msgstr "Затвори"
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:12
+msgid "Database backups"
+msgstr "Архиви на базата данни"
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:14
+msgid "To create new backup, use <Create> button below."
+msgstr "За да създадете нов архив, използвайте бутона <Създай> отдолу."
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:14
+msgid "Possible errors, related to your PHP host settings"
+msgstr "Възможни грешки, свързани с настройките на PHP"
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:16
+#: modules/Zfiler/templates/admin/backupdb.tpl:17
+#, php-format
+msgid "Solution is to increase `%s` PHP setting."
+msgstr "Решението е да се увеличи '%s' в PHP настройки."
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:16
+#, php-format
+msgid "Current value is %s."
+msgstr "Текущата стойност, е %s."
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:17
+#, php-format
+msgid "Current value is %s seconds."
+msgstr "Текущата стойност е %s секунди."
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:21
+msgid "Selected tables only"
+msgstr "Само избрани таблици"
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:26
+msgid "Tables to export"
+msgstr "Таблици за експортиране"
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:27
+#: modules/Zfiler/templates/admin/backupdb.tpl:77
+msgid "Total"
+msgstr "Общо"
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:39
+msgid "Export method"
+msgstr "Метод за експорта"
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:41
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:60
+msgid "Mysqldump php"
+msgstr "Mysqldump php"
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:42
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:61
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:67
+msgid "Mysqldump shell"
+msgstr "Mysqldump shell"
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:43
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:62
+msgid "Zfiler native"
+msgstr "Zfiler native"
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:51
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:88
+msgid "Compression"
+msgstr "Компресия"
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:53
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:90
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:125
+msgid "None"
+msgstr "Няма"
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:54
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:91
+msgid "Gzip"
+msgstr "Gzip"
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:62
+msgid "Create"
+msgstr "Създай"
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:62
+msgid "Create backup"
+msgstr "Създай архив"
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:63
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:142
+#: modules/Zfiler/templates/admin/scripts.tpl:36
+#: modules/Zfiler/templates/admin/editfile.tpl:67
+msgid "Cancel"
+msgstr "Отказ"
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:67
+msgid "Backups directory"
+msgstr "Директория за архивите"
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:73
+msgid "Here is list of past database backups, available in directory:"
+msgstr ""
+"Това е списък с последните архиви на базата данни, достъпни в директория:"
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:76
+msgid "Past backups"
+msgstr "Минали архиви"
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:77
+msgid "file"
+msgstr "файл"
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:77
+msgid "files"
+msgstr "файла"
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:77
+msgid "byte"
+msgstr "байт"
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:77
+#: modules/Zfiler/templates/admin/backupdb.tpl:81
+#: modules/Zfiler/templates/admin/scripts.tpl:20
+msgid "bytes"
+msgstr "байта"
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:84
+msgid "File name format"
+msgstr "Формат на името на файла"
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:84
+msgid "date"
+msgstr "дата"
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:84
+msgid "time"
+msgstr "час"
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:84
+msgid "database"
+msgstr "база данни"
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:84
+msgid "tables count-archived-total"
+msgstr "брой таблици-архивирани-общо"
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:84
+msgid "method"
+msgstr "метод"
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:88
+#: modules/Zfiler/templates/admin/scripts.tpl:25
+msgid "Download"
+msgstr "Изтегли"
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:88
+msgid "Download backup"
+msgstr "Изтегли архив"
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:89
+#: modules/Zfiler/templates/admin/scripts.tpl:24
+msgid "Delete"
+msgstr "Изтрий"
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:89
+msgid "Delete backup"
+msgstr "Изтрий архив"
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:90
+msgid "Restore"
+msgstr "Възстанови"
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:90
+msgid "Restore backup"
+msgstr "Възстанови от архив"
+
+#: modules/Zfiler/templates/admin/sysinfo.tpl:8
+msgid "Server information"
+msgstr "Информация за сървъра"
+
+#: modules/Zfiler/templates/admin/sysinfo.tpl:13
+#: modules/Zfiler/templates/admin/clientinfo.tpl:13
+msgid "General info"
+msgstr "Обща информация"
+
+#: modules/Zfiler/templates/admin/sysinfo.tpl:17
+#: modules/Zfiler/templates/admin/sysinfo.tpl:45
+msgid "Please enter URL in settings."
+msgstr "Моля въведете URL в настройките."
+
+#: modules/Zfiler/templates/admin/sysinfo.tpl:17
+#: modules/Zfiler/templates/admin/sysinfo.tpl:19
+msgid "Hosting admin panel"
+msgstr "Админ панел на хостинга"
+
+#: modules/Zfiler/templates/admin/sysinfo.tpl:19
+#: modules/Zfiler/templates/admin/sysinfo.tpl:47
+#: modules/Zfiler/templates/admin/sysinfo.tpl:71
+msgid "Open on new page"
+msgstr "Отваря на нова страница"
+
+#: modules/Zfiler/templates/admin/sysinfo.tpl:24
+msgid "System"
+msgstr "Система"
+
+#: modules/Zfiler/templates/admin/sysinfo.tpl:28
+msgid "Server IP address and port"
+msgstr "IP адрес и порт на сървъра"
+
+#: modules/Zfiler/templates/admin/sysinfo.tpl:31
+#: modules/Zfiler/templates/admin/clientinfo.tpl:18
+#: modules/Zfiler/templates/admin/clientinfo.tpl:28
+msgid "See details"
+msgstr "Виж детайли"
+
+#: modules/Zfiler/templates/admin/sysinfo.tpl:32
+#: modules/Zfiler/templates/admin/clientinfo.tpl:19
+msgid "Visit site"
+msgstr "Посети сайта"
+
+#: modules/Zfiler/templates/admin/sysinfo.tpl:36
+msgid "Site root directory"
+msgstr "Основна директория на сайта"
+
+#: modules/Zfiler/templates/admin/sysinfo.tpl:41
+msgid "Database info"
+msgstr "Информация за базата данни"
+
+#: modules/Zfiler/templates/admin/sysinfo.tpl:45
+#: modules/Zfiler/templates/admin/sysinfo.tpl:47
+msgid "Database admin panel"
+msgstr "Админ панел на базата данни"
+
+#: modules/Zfiler/templates/admin/sysinfo.tpl:52
+msgid "Database server"
+msgstr "Сървър на базата данни"
+
+#: modules/Zfiler/templates/admin/sysinfo.tpl:56
+msgid "Database driver"
+msgstr "Драйвер на базата данни"
+
+#: modules/Zfiler/templates/admin/sysinfo.tpl:60
+msgid "Database host"
+msgstr "Хост на базата данни"
+
+#: modules/Zfiler/templates/admin/sysinfo.tpl:64
+msgid "Database name"
+msgstr "Име на базата данни"
+
+#: modules/Zfiler/templates/admin/sysinfo.tpl:70
+msgid "PHP info"
+msgstr "PHP информация"
+
+#: modules/Zfiler/templates/admin/sysinfo.tpl:71
+msgid "Display PHP info in new page"
+msgstr "Покажи PHP информация на нова страница"
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:5
+msgid "Module settings"
+msgstr "Настройки на модула"
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:11
+msgid "General settings"
+msgstr "Общи настройки"
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:13
+msgid "Hosting admin URL"
+msgstr "URL за администрация на хостинга"
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:16
+msgid ""
+"Enter here URL address to your hosting provider admin panel (Cpanel or "
+"other)."
+msgstr ""
+"Въведете тук URL адреса на администраторския панел на вашия доставчик на "
+"хостинга (Cpanel или друг)."
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:17
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:25
+msgid "Link will appear in the info page for easy access."
+msgstr "Връзката ще се появява на информационната страница за бърз достъп."
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:21
+msgid "Database admin URL"
+msgstr "URL за администрация на базата данни"
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:24
+msgid ""
+"Enter here URL address to your database admin panel (phpMyAdmin or other)."
+msgstr ""
+"Въведете тук URL адреса на администраторския панел за базата данни "
+"(phpMyAdmin или друг)."
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:29
+msgid "Display PHP info"
+msgstr "Покажи PHP информация"
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:31
+msgid "With link in new page"
+msgstr "С препратка в нова страница"
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:32
+msgid "Always on info page"
+msgstr "Винаги на информационната страница"
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:33
+msgid "Never"
+msgstr "Никога"
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:39
+msgid "Backups"
+msgstr "Архиви"
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:41
+msgid "Default backups directory"
+msgstr "Директория по подразбиране за архивите"
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:44
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:102
+msgid "Directory exist."
+msgstr "Директорията съществува."
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:46
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:104
+msgid "Directory does not exist!"
+msgstr "Директорията не съществува."
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:48
+msgid "This is the place, where database backup files are stored."
+msgstr ""
+"Това е мястото, където се съхраняват архивните файлове на базата данни."
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:53
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:111
+msgid "Create specified directory"
+msgstr "Създай указаната директория"
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:58
+msgid "Default export method"
+msgstr "Метод за експорт по подразбиране"
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:60
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:62
+msgid "pure php/sql code"
+msgstr "чист PHP/SQL код"
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:61
+msgid "call to mysqldump executable - fastest, but depend on server rights"
+msgstr ""
+"извиква mysqldump команда - най-бързият, но зависи от правата на сървъра"
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:66
+msgid "Mysqldump executable"
+msgstr "Mysqldump изпълним файл"
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:67
+msgid "Only for method"
+msgstr "Само за метод"
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:73
+msgid "File exist."
+msgstr "Файлът съществува."
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:75
+msgid "File does not exist!"
+msgstr "Файлът не съществува!"
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:77
+msgid ""
+"Ordinary path is `/usr/bin/mysqldump`, but leave empty if you are not sure, "
+"this is OK for most cases."
+msgstr ""
+"Обикновено пътят е `/usr/bin/mysqldump`, но оставете празно, ако не сте "
+"сигурни, това е добре за повечето случаи."
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:81
+msgid "Display export method selector"
+msgstr "Показва за избор метод за експорт"
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:83
+msgid "No"
+msgstr "Не"
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:84
+msgid "Yes"
+msgstr "Да"
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:99
+msgid "Default scripts directory"
+msgstr "Директория по подразбиране за скриптове"
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:106
+msgid "This is the place, where you upload scripts to execute."
+msgstr "Това е мястото, където качвате скриптовете за изпълнение."
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:106
+#: modules/Zfiler/templates/admin/scripts.tpl:16
+msgid "See example.php for sample."
+msgstr "За пример вижте example.php."
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:116
+msgid "Display scripts"
+msgstr "Покажи скриптовете"
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:118
+msgid "Not sorted"
+msgstr "Не сортирани"
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:119
+msgid "Alphabetical order"
+msgstr "По азбучен ред ред"
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:123
+msgid "Internal editor for scripts"
+msgstr "Вътрешен редактор за скриптове"
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:126
+msgid "CodeMirror"
+msgstr "CodeMirror"
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:132
+msgid "Download files"
+msgstr "Изтегляне на файлове"
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:134
+msgid "Use HTTP ranges"
+msgstr "Използват се HTTP диапазони"
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:136
+msgid ""
+"This allow client (browser) to resume aborted downloads. Disable if broken "
+"files are received."
+msgstr ""
+"Това позволява на клиента (браузъра) да възобнови прекъснати тегления. "
+"Изключете го, ако са получени счупени файлове."
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:141
+#: modules/Zfiler/templates/admin/editfile.tpl:63
+msgid "Save"
+msgstr "Запази"
+
+#: modules/Zfiler/templates/admin/scripts.tpl:4
+msgid "Scripts to execute"
+msgstr "Скриптове за изпълнение"
+
+#: modules/Zfiler/templates/admin/scripts.tpl:8
+msgid ""
+"This module executes PHP scripts, with system core functions and classes "
+"available."
+msgstr ""
+"Този модул изпълнява PHP скриптове, като на разположение са функциите и "
+"класовете на системата."
+
+#: modules/Zfiler/templates/admin/scripts.tpl:15
+msgid ""
+"To add more scripts ready for execution, please upload them in scripts "
+"directory:"
+msgstr ""
+"За да добавите още скриптове достъпни за изпълнение, моля качете ги в "
+"директорията за скриптове."
+
+#: modules/Zfiler/templates/admin/scripts.tpl:16
+msgid "You can create an empty script in the form below."
+msgstr "Можете да създадете празен скрипт във формата по-долу."
+
+#: modules/Zfiler/templates/admin/scripts.tpl:23
+msgid "Edit"
+msgstr "Редактирай"
+
+#: modules/Zfiler/templates/admin/scripts.tpl:24
+msgid "Are you sure you want to delete file"
+msgstr "Сигурни ли сте, че искате да изтриете файл"
+
+#: modules/Zfiler/templates/admin/scripts.tpl:29
+msgid "Create empty PHP file:"
+msgstr "Създай празен PHP файл:"
+
+#: modules/Zfiler/templates/admin/scripts.tpl:31
+msgid "Enter just file name, php extension will be forced."
+msgstr "Напишете само името на файла, разширение на PHP ще бъде поставено."
+
+#: modules/Zfiler/templates/admin/scripts.tpl:35
+msgid "Execute"
+msgstr "Изпълни"
+
+#: modules/Zfiler/templates/admin/scripts.tpl:43
+msgid "Security"
+msgstr "Сигурност"
+
+#: modules/Zfiler/templates/admin/scripts.tpl:45
+msgid ""
+"By default the system is protected from unauthorized web access. Anyway, for "
+"security reason, you can explicitly lock access to scripts directory, by "
+"creating .htaccess file in it."
+msgstr ""
+"По подразбиране системата е защитена от неоторизиран уеб достъп. Във всеки "
+"случай,  за допълнителна сигурност, изрично можете да заключите достъпа до "
+"скриптовете в директорията, чрез създаване на .htaccess файл в нея."
+
+#: modules/Zfiler/templates/admin/scripts.tpl:48
+msgid "Scripts directory"
+msgstr "Директория за скриптове"
+
+#: modules/Zfiler/templates/admin/scripts.tpl:52
+msgid "Status"
+msgstr "Статус"
+
+#: modules/Zfiler/templates/admin/scripts.tpl:52
+msgid "Locked"
+msgstr "Заключена"
+
+#: modules/Zfiler/templates/admin/scripts.tpl:52
+msgid "Unlocked"
+msgstr "Отключена"
+
+#: modules/Zfiler/templates/admin/scripts.tpl:56
+msgid "Unlock"
+msgstr "Отключи"
+
+#: modules/Zfiler/templates/admin/scripts.tpl:57
+msgid "Lock"
+msgstr "Заключи"
+
+#: modules/Zfiler/templates/admin/editfile.tpl:27
+msgid "Edit script"
+msgstr "Редакция на скрипт"
+
+#: modules/Zfiler/templates/admin/editfile.tpl:34
+msgid "Script"
+msgstr "Скрипт"
+
+#: modules/Zfiler/templates/admin/editfile.tpl:53
+msgid "Save as new file"
+msgstr "Запиши като нов файл"
+
+#: modules/Zfiler/templates/admin/editfile.tpl:55
+msgid "If you enter here, the file will save as new with this name."
+msgstr "Ако въведете тук, файлът ще запишете като нов с това име."
+
+#: modules/Zfiler/templates/admin/editfile.tpl:64
+msgid "Save and edit"
+msgstr "Запази и редактирай"
+
+#: modules/Zfiler/templates/admin/editfile.tpl:65
+msgid "Save and execute"
+msgstr "Запази и изпълни"
+
+#: modules/Zfiler/templates/admin/editfile.tpl:66
+msgid "Execute and edit"
+msgstr "Изпълни и редактирай"
+
+#: modules/Zfiler/templates/admin/clientinfo.tpl:8
+msgid "Client information"
+msgstr "Информация за клиента"
+
+#: modules/Zfiler/templates/admin/clientinfo.tpl:15
+msgid "User IP address and port"
+msgstr "IP адрес и порт на потребителя"
+
+#: modules/Zfiler/templates/admin/clientinfo.tpl:24
+msgid "Browser info"
+msgstr "Информация за браузъра"
+
+#: modules/Zfiler/templates/admin/clientinfo.tpl:26
+msgid "User agent"
+msgstr "Потребителски агент"
+
+#: modules/Zfiler/templates/admin/clientinfo.tpl:31
+msgid "Accept language"
+msgstr "Приема език"
+
+#: modules/Zfiler/templates/admin/clientinfo.tpl:35
+msgid "Accept"
+msgstr "Приема"
+
+#: modules/Zfiler/templates/admin/clientinfo.tpl:39
+msgid "Cookies"
+msgstr "Бисквитки"
+
+#: modules/Zfiler/templates/admin/clientinfo.tpl:40
+msgid "Display on new page"
+msgstr "Показва на нова страница"
+
+#: modules/Zfiler/templates/admin/ipinfo.tpl:4
+msgid "IP address"
+msgstr "IP адрес"
+
+#: modules/Zfiler/templates/admin/ipinfo.tpl:8
+msgid "Host name"
+msgstr "Име на хост"
+
+#: modules/Zfiler/templates/admin/ipinfo.tpl:12
+msgid "City"
+msgstr "Град"
+
+#: modules/Zfiler/templates/admin/ipinfo.tpl:16
+msgid "Region"
+msgstr "Регион"
+
+#: modules/Zfiler/templates/admin/ipinfo.tpl:20
+msgid "Country"
+msgstr "Държава"
+
+#: modules/Zfiler/templates/admin/ipinfo.tpl:24
+msgid "Location"
+msgstr "Място"
+
+#: modules/Zfiler/templates/admin/ipinfo.tpl:30
+msgid "click for map"
+msgstr "кликни за карта"
+
+#: modules/Zfiler/templates/admin/ipinfo.tpl:38
+msgid "Organization"
+msgstr "Организация"
+
+#: modules/Zfiler/templates/admin/ipinfo.tpl:43
+msgid "Visit service site"
+msgstr "Посетете сайта на услугата"

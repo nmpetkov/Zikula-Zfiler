@@ -1,0 +1,25 @@
+{
+    "extension": {
+        "title": "File manager",
+        "url": "https://github.com/nmpetkov/Zfiler/wiki",
+        "icon": "http://www.cmstory.com/images/github/zfiler.png"
+    },
+    "version": {
+        "keywords": [
+            "zikula",
+            "filer",
+            "file",
+            "manager",
+            "elfinder"
+        ],
+        "semver": "1.0.2",
+        "dependencies": {
+            "zikula/core": ">1.3.0 <1.5"
+        },
+        "composerpath": "composer.json",
+        "description": "Provides file manager for Zikula sites.",
+        "urls": {
+            "issues": "https://github.com/nmpetkov/Zfiler/issues"
+        }
+    }
+}

@@ -1,0 +1,33 @@
+﻿/* Zfiler stylesheet */
+
+.z-icon-es-folder {
+    background: url("/images/icons/extrasmall/folder_yellow.png") no-repeat scroll 0 50% transparent;
+    padding: 2px 0 2px 20px;
+}
+.checkbox {
+    min-height: 27px;
+}
+.checkboxgroup {
+    height: auto;
+    overflow: auto;
+    padding: 9px;
+    border-radius: 2px;
+    background-color: #fafafa;
+    border: 1px solid #dddddd;
+}
+.input-group {
+    display: inline;
+    width: 100%;
+}
+.input-block {
+    width: 67.8%;
+    margin-left: 29% !important;
+}
+
+.sp-replacer { /* spectrum color picker*/
+    display: inline-block !important;
+}
+
+.img-thumb {
+    height: 100px;
+}

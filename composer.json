@@ -1,0 +1,15 @@
+{
+    "name": "nmpetkov/zfiler-module",
+    "description": "Provides file manager for Zikula sites.",
+    "type": "zikula-module",
+    "license": "GPL-3.0+",
+    "authors": [
+        {
+            "name": "Nikolay Petkov",
+            "homepage": "https://github.com/nmpetkov"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3"
+    }
+}

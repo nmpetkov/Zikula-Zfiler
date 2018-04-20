@@ -1,0 +1,44 @@
+﻿@media (min-width: 768px) {
+    .modal-dialog {
+        width: 95%;
+    }
+}
+@media (min-width: 900px) {
+    .modal-dialog {
+        width: 85%;
+    }
+}
+@media (min-width: 1200px) {
+    .modal-dialog {
+        width: 75%;
+    }
+}
+.modal-header {
+    padding: 8px;
+    border-bottom: 0;
+    background-color: #cdcfd4;
+}
+
+/* overwrites to elFinder CSS */
+.elfinder-cwd-view-list td .elfinder-cwd-icon { /* list view icons */
+	width: 21px !important;
+	height: 21px !important;
+    top: 0 !important;
+    margin: 0 !important;
+}
+.elfinder-cwd-icon.elfinder-cwd-bgurl:after { /* some not wanted icons appears accidentally */
+    display: none;
+}
+.ui-helper-hidden-accessible { /* because jquery-ui not in effect for some reason */
+    border: 0 !important;
+    clip: rect(0 0 0 0) !important;
+    height: 1px !important;
+    margin: -1px !important;
+    padding: 0 !important;
+    position: absolute !important;
+    width: 1px !important;
+}
+.ui-dialog { z-index: 10050 !important ;} /* elfinder dialog window to be over ckeditor dialog */
+.elfinder {
+    font-size: 18px !important;
+}

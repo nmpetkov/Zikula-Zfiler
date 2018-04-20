@@ -1,0 +1,863 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Zikula 1.x\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-03-07 20:30+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: modules/Zfiler/lib/Zfiler/Version.php:13
+msgid "System tools"
+msgstr ""
+
+#. !module name that appears in URL
+#: modules/Zfiler/lib/Zfiler/Version.php:14
+msgid "zfiler"
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Version.php:15
+msgid "System tools and code execution."
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Version.php:27
+msgid "Zfiler hooks"
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:22
+msgid "Server"
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:28
+msgid "Client"
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:34
+#: modules/Zfiler/templates/admin/backupdb.tpl:6
+msgid "Backup"
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:40
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:97
+#: modules/Zfiler/templates/admin/scripts.tpl:13
+msgid "Scripts"
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:46
+msgid "Settings"
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:52
+msgid "Wiki"
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:65
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:302
+#: modules/Zfiler/lib/Zfiler/Api/Backup.php:76
+msgid "Error! File name can not be empty."
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:68
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:305
+#, php-format
+msgid "Error! File %s already exist."
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:74
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:153
+#: modules/Zfiler/lib/Zfiler/Api/Backup.php:228
+#, php-format
+msgid "Error! Can not create file %s."
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:80
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:158
+#, php-format
+msgid "Error! Can not write to file %s."
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:100
+#: modules/Zfiler/lib/Zfiler/Api/Backup.php:208
+#: modules/Zfiler/lib/Zfiler/Api/Backup.php:373
+msgid "Error!"
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:103
+#, php-format
+msgid "Result from: %s"
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:106
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:324
+#, php-format
+msgid "Error! File does not exist: %s"
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:165
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:357
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:571
+#, php-format
+msgid "Error! File %s can not be deleted."
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:283
+#, php-format
+msgid "Can not read from file %s."
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:287
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:360
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:574
+#, php-format
+msgid "File does not exist: %s"
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:312
+#, php-format
+msgid "Done! Database backup is created in file %s."
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:314
+#, php-format
+msgid "Error creating database backup in file %s."
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Api/Admin.php:318
+#, php-format
+msgid "Size of created file is %s bytes."
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Api/Backup.php:99
+#, php-format
+msgid "Create backup start time: %s."
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Api/Backup.php:132
+#, php-format
+msgid "Create backup end time: %s."
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Api/Backup.php:132
+#, php-format
+msgid "Execution time: %s seconds."
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Api/Backup.php:171
+msgid "Status:"
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Api/Backup.php:415
+msgid "Error! Can not obtain connection to database."
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:94
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:107
+#, php-format
+msgid "Directory exists: %s."
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:97
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:110
+#, php-format
+msgid "Directory is created: %s."
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:99
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:113
+#, php-format
+msgid "Can not create directory %s."
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:100
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:111
+msgid "Please create it manually, for example with FTP client."
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:121
+msgid "Done! Updated configuration."
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:138
+msgid "Please specify in module settings directory for scripts to execute!"
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:158
+msgid ""
+"Please visit module settings and create directory for scripts to execute!"
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:188
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:412
+#, php-format
+msgid "New file %s is created."
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:202
+msgid "Done! Executed selected scripts."
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:205
+msgid "Please select scripts to execute!"
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:355
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:569
+#, php-format
+msgid "File %s is deleted."
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:404
+msgid "Error! File name is empty."
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:419
+#, php-format
+msgid "Error! Can not write content to file %s."
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:421
+#, php-format
+msgid "Done! File %s is saved."
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:424
+#, php-format
+msgid "Error! File %s does not exist."
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:474
+msgid "Please specify in module settings directory for backups to store!"
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:489
+msgid "Please visit module settings and create directory for backups to store!"
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:584
+#: modules/Zfiler/lib/Zfiler/Controller/Admin.php:596
+msgid "Please select a file from the list."
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Controller/Ajax.php:27
+msgid "No IP passed."
+msgstr ""
+
+#: modules/Zfiler/lib/Zfiler/Controller/Ajax.php:75
+msgid "Could not get info."
+msgstr ""
+
+#: modules/Zfiler/templates/admin/ipinfo_ajax.tpl:1
+msgid "IP address information"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/ipinfo_ajax.tpl:4
+msgid "Close"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:12
+msgid "Database backups"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:14
+msgid "To create new backup, use <Create> button below."
+msgstr ""
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:14
+msgid "Possible errors, related to your PHP host settings"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:16
+#: modules/Zfiler/templates/admin/backupdb.tpl:17
+#, php-format
+msgid "Solution is to increase `%s` PHP setting."
+msgstr ""
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:16
+#, php-format
+msgid "Current value is %s."
+msgstr ""
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:17
+#, php-format
+msgid "Current value is %s seconds."
+msgstr ""
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:21
+msgid "Selected tables only"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:26
+msgid "Tables to export"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:27
+#: modules/Zfiler/templates/admin/backupdb.tpl:77
+msgid "Total"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:39
+msgid "Export method"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:41
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:60
+msgid "Mysqldump php"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:42
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:61
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:67
+msgid "Mysqldump shell"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:43
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:62
+msgid "Zfiler native"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:51
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:88
+msgid "Compression"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:53
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:90
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:125
+msgid "None"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:54
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:91
+msgid "Gzip"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:62
+msgid "Create"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:62
+msgid "Create backup"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:63
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:142
+#: modules/Zfiler/templates/admin/scripts.tpl:36
+#: modules/Zfiler/templates/admin/editfile.tpl:67
+msgid "Cancel"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:67
+msgid "Backups directory"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:73
+msgid "Here is list of past database backups, available in directory:"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:76
+msgid "Past backups"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:77
+msgid "file"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:77
+msgid "files"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:77
+msgid "byte"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:77
+#: modules/Zfiler/templates/admin/backupdb.tpl:81
+#: modules/Zfiler/templates/admin/scripts.tpl:20
+msgid "bytes"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:84
+msgid "File name format"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:84
+msgid "date"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:84
+msgid "time"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:84
+msgid "database"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:84
+msgid "tables count-archived-total"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:84
+msgid "method"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:88
+#: modules/Zfiler/templates/admin/scripts.tpl:25
+msgid "Download"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:88
+msgid "Download backup"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:89
+#: modules/Zfiler/templates/admin/scripts.tpl:24
+msgid "Delete"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:89
+msgid "Delete backup"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:90
+msgid "Restore"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/backupdb.tpl:90
+msgid "Restore backup"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/sysinfo.tpl:8
+msgid "Server information"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/sysinfo.tpl:13
+#: modules/Zfiler/templates/admin/clientinfo.tpl:13
+msgid "General info"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/sysinfo.tpl:17
+#: modules/Zfiler/templates/admin/sysinfo.tpl:45
+msgid "Please enter URL in settings."
+msgstr ""
+
+#: modules/Zfiler/templates/admin/sysinfo.tpl:17
+#: modules/Zfiler/templates/admin/sysinfo.tpl:19
+msgid "Hosting admin panel"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/sysinfo.tpl:19
+#: modules/Zfiler/templates/admin/sysinfo.tpl:47
+#: modules/Zfiler/templates/admin/sysinfo.tpl:71
+msgid "Open on new page"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/sysinfo.tpl:24
+msgid "System"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/sysinfo.tpl:28
+msgid "Server IP address and port"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/sysinfo.tpl:31
+#: modules/Zfiler/templates/admin/clientinfo.tpl:18
+#: modules/Zfiler/templates/admin/clientinfo.tpl:28
+msgid "See details"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/sysinfo.tpl:32
+#: modules/Zfiler/templates/admin/clientinfo.tpl:19
+msgid "Visit site"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/sysinfo.tpl:36
+msgid "Site root directory"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/sysinfo.tpl:41
+msgid "Database info"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/sysinfo.tpl:45
+#: modules/Zfiler/templates/admin/sysinfo.tpl:47
+msgid "Database admin panel"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/sysinfo.tpl:52
+msgid "Database server"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/sysinfo.tpl:56
+msgid "Database driver"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/sysinfo.tpl:60
+msgid "Database host"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/sysinfo.tpl:64
+msgid "Database name"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/sysinfo.tpl:70
+msgid "PHP info"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/sysinfo.tpl:71
+msgid "Display PHP info in new page"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:5
+msgid "Module settings"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:11
+msgid "General settings"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:13
+msgid "Hosting admin URL"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:16
+msgid ""
+"Enter here URL address to your hosting provider admin panel (Cpanel or "
+"other)."
+msgstr ""
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:17
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:25
+msgid "Link will appear in the info page for easy access."
+msgstr ""
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:21
+msgid "Database admin URL"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:24
+msgid ""
+"Enter here URL address to your database admin panel (phpMyAdmin or other)."
+msgstr ""
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:29
+msgid "Display PHP info"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:31
+msgid "With link in new page"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:32
+msgid "Always on info page"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:33
+msgid "Never"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:39
+msgid "Backups"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:41
+msgid "Default backups directory"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:44
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:102
+msgid "Directory exist."
+msgstr ""
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:46
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:104
+msgid "Directory does not exist!"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:48
+msgid "This is the place, where database backup files are stored."
+msgstr ""
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:53
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:111
+msgid "Create specified directory"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:58
+msgid "Default export method"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:60
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:62
+msgid "pure php/sql code"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:61
+msgid "call to mysqldump executable - fastest, but depend on server rights"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:66
+msgid "Mysqldump executable"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:67
+msgid "Only for method"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:73
+msgid "File exist."
+msgstr ""
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:75
+msgid "File does not exist!"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:77
+msgid ""
+"Ordinary path is `/usr/bin/mysqldump`, but leave empty if you are not sure, "
+"this is OK for most cases."
+msgstr ""
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:81
+msgid "Display export method selector"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:83
+msgid "No"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:84
+msgid "Yes"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:99
+msgid "Default scripts directory"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:106
+msgid "This is the place, where you upload scripts to execute."
+msgstr ""
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:106
+#: modules/Zfiler/templates/admin/scripts.tpl:16
+msgid "See example.php for sample."
+msgstr ""
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:116
+msgid "Display scripts"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:118
+msgid "Not sorted"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:119
+msgid "Alphabetical order"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:123
+msgid "Internal editor for scripts"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:126
+msgid "CodeMirror"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:132
+msgid "Download files"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:134
+msgid "Use HTTP ranges"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:136
+msgid ""
+"This allow client (browser) to resume aborted downloads. Disable if broken "
+"files are received."
+msgstr ""
+
+#: modules/Zfiler/templates/admin/modifyconfig.tpl:141
+#: modules/Zfiler/templates/admin/editfile.tpl:63
+msgid "Save"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/scripts.tpl:4
+msgid "Scripts to execute"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/scripts.tpl:8
+msgid ""
+"This module executes PHP scripts, with system core functions and classes "
+"available."
+msgstr ""
+
+#: modules/Zfiler/templates/admin/scripts.tpl:15
+msgid ""
+"To add more scripts ready for execution, please upload them in scripts "
+"directory:"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/scripts.tpl:16
+msgid "You can create an empty script in the form below."
+msgstr ""
+
+#: modules/Zfiler/templates/admin/scripts.tpl:23
+msgid "Edit"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/scripts.tpl:24
+msgid "Are you sure you want to delete file"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/scripts.tpl:29
+msgid "Create empty PHP file:"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/scripts.tpl:31
+msgid "Enter just file name, php extension will be forced."
+msgstr ""
+
+#: modules/Zfiler/templates/admin/scripts.tpl:35
+msgid "Execute"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/scripts.tpl:43
+msgid "Security"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/scripts.tpl:45
+msgid ""
+"By default the system is protected from unauthorized web access. Anyway, for "
+"security reason, you can explicitly lock access to scripts directory, by "
+"creating .htaccess file in it."
+msgstr ""
+
+#: modules/Zfiler/templates/admin/scripts.tpl:48
+msgid "Scripts directory"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/scripts.tpl:52
+msgid "Status"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/scripts.tpl:52
+msgid "Locked"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/scripts.tpl:52
+msgid "Unlocked"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/scripts.tpl:56
+msgid "Unlock"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/scripts.tpl:57
+msgid "Lock"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/editfile.tpl:27
+msgid "Edit script"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/editfile.tpl:34
+msgid "Script"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/editfile.tpl:53
+msgid "Save as new file"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/editfile.tpl:55
+msgid "If you enter here, the file will save as new with this name."
+msgstr ""
+
+#: modules/Zfiler/templates/admin/editfile.tpl:64
+msgid "Save and edit"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/editfile.tpl:65
+msgid "Save and execute"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/editfile.tpl:66
+msgid "Execute and edit"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/clientinfo.tpl:8
+msgid "Client information"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/clientinfo.tpl:15
+msgid "User IP address and port"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/clientinfo.tpl:24
+msgid "Browser info"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/clientinfo.tpl:26
+msgid "User agent"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/clientinfo.tpl:31
+msgid "Accept language"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/clientinfo.tpl:35
+msgid "Accept"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/clientinfo.tpl:39
+msgid "Cookies"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/clientinfo.tpl:40
+msgid "Display on new page"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/ipinfo.tpl:4
+msgid "IP address"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/ipinfo.tpl:8
+msgid "Host name"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/ipinfo.tpl:12
+msgid "City"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/ipinfo.tpl:16
+msgid "Region"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/ipinfo.tpl:20
+msgid "Country"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/ipinfo.tpl:24
+msgid "Location"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/ipinfo.tpl:30
+msgid "click for map"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/ipinfo.tpl:38
+msgid "Organization"
+msgstr ""
+
+#: modules/Zfiler/templates/admin/ipinfo.tpl:43
+msgid "Visit service site"
+msgstr ""
