@@ -15,6 +15,7 @@
 {/if}
 <link type="text/css" href="modules/Zfiler/style/elfinder.css" rel="stylesheet" media="screen" />
 <script type="text/javascript" src="modules/Zfiler/javascript/vendor/elfinder/js/elfinder.min.js"></script>
+<script type="text/javascript" src="modules/Zfiler/javascript/vendor/elfinder/js/extras/editors.default.min.js"></script>
 {if $lang_elfinder != 'en'}<script type="text/javascript" src="modules/Zfiler/javascript/vendor/elfinder/js/i18n/elfinder.{$lang_elfinder}.js"></script>{/if}
 <style type="text/css">
 {{if !$elfinder_iconfiletype}}

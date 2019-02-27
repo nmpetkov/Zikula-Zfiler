@@ -20,8 +20,28 @@
 			}
 			return hasFlash;
 		})(),
+		ext2mime = {
+			jpg: 'image/jpeg',
+			jpeg: 'image/jpeg',
+			png: 'image/png',
+			gif: 'image/gif',
+			bmp: 'image/x-ms-bmp',
+			svg: 'image/svg+xml',
+			pxd: 'image/x-pixlr-data'
+		},
+		mime2ext,
+		getExtention = function(file, fm) {
+			if (!mime2ext) {
+				mime2ext = fm.arrayFlip(ext2mime);
+			}
+			var ext = mime2ext[file.mime] || fm.mimeTypes[file.mime];
+			if (ext === 'jpeg') {
+				ext = 'jpg';
+			}
+			return ext;
+		},
 		initImgTag = function(id, file, content, fm) {
-			var node = $(this).children('img:first'),
+			var node = $(this).children('img:first').data('ext', getExtention(file, fm)),
 				spnr = $('<div/>')
 					.css({
 						position: 'absolute',
@@ -74,7 +94,7 @@
 			}
 			var pixlr = window.location.search.match(/[?&]pixlr=([^&]+)/),
 				image = window.location.search.match(/[?&]image=([^&]+)/),
-				p, ifm, url, node;
+				p, ifm, url, node, ext;
 			if (pixlr) {
 				// case of redirected from pixlr.com
 				p = window.parent;
@@ -82,6 +102,13 @@
 				node = p.$('#'+pixlr[1]).data('resizeoff')();
 				if (image[1].substr(0, 4) === 'http') {
 					url = image[1];
+					ext = url.replace(/.+\.([^.]+)$/, '$1');
+					if (node.data('ext') !== ext) {
+						node.closest('.ui-dialog').trigger('changeType', {
+							extention: ext,
+							mime : ext2mime[ext]
+						});
+					}
 					if (window.location.protocol === 'https:') {
 						url = url.replace(/^http:/, 'https:');
 					}
@@ -93,7 +120,7 @@
 				} else {
 					node.data('loading')(true);
 				}
-				ifm.remove();
+				ifm.trigger('destroy').remove();
 			}
 		},
 		pixlrSetup = function(opts, fm) {
@@ -104,35 +131,58 @@
 		pixlrLoad = function(mode, base) {
 			var self = this,
 				fm = this.fm,
+				clPreventBack = fm.res('class', 'preventback'),
 				node = $(base).children('img:first')
 					.data('loading')()
 					.data('resizeoff', function() {
 						$(window).off('resize.'+node.attr('id'));
+						dialog.addClass(clPreventBack);
 						return node;
 					})
 					.on('click', function() {
 						launch();
 					}),
+				dialog = $(base).closest('.ui-dialog'),
 				elfNode = fm.getUI(),
+				uiToast = fm.getUI('toast'),
 				container = $('<iframe class="ui-front" allowtransparency="true">'),
 				file = this.file,
+				timeout = 15,
 				error = function(error) {
-					container.remove();
-					node.data('loading')(true);
-					fm.error(error || 'Can not launch Pixlr.');
+					if (error) {
+						container.trigger('destroy').remove();
+						node.data('loading')(true);
+						fm.error(error);
+					} else {
+						uiToast.appendTo(dialog.closest('.ui-dialog'));
+						fm.toast({
+							mode: 'info',
+							msg: 'Can not launch Pixlr yet. Waiting ' + timeout + ' seconds.',
+							button: {
+								text: 'Abort',
+								click: function() {
+									container.trigger('destroy').remove();
+									node.data('loading')(true);
+								}
+							},
+							onHidden: function() {
+								uiToast.children().length === 1 && uiToast.appendTo(fm.getUI());
+							}
+						});
+						errtm = setTimeout(error, timeout * 1000);
+					}
 				},
 				launch = function() {
 					var src = 'https://pixlr.com/'+mode+'/?s=c',
 						myurl = window.location.href.toString().replace(/#.*$/, ''),
 						opts = {};
 
-					errtm = setTimeout(error, 15000);
+					errtm = setTimeout(error, timeout * 1000);
 					myurl += (myurl.indexOf('?') === -1? '?' : '&') + 'pixlr='+node.attr('id');
 					src += '&referrer=elFinder&locktitle=true';
 					src += '&exit='+encodeURIComponent(myurl+'&image=0');
 					src += '&target='+encodeURIComponent(myurl);
 					src += '&title='+encodeURIComponent(file.name);
-					src += '&locktype='+encodeURIComponent(file.mime === 'image/png'? 'png' : 'jpg');
 					src += '&image='+encodeURIComponent(node.attr('src'));
 					
 					opts.src = src;
@@ -166,16 +216,18 @@
 									error('Please disable your ad blocker.');
 								}
 							}, 1000);
+							dialog.addClass(clPreventBack);
+							fm.toggleMaximize(container, true);
 							fm.toFront(container);
+						})
+						.on('destroy', function() {
+							fm.toggleMaximize(container, false);
 						})
 						.on('error', error)
 						.appendTo(elfNode.hasClass('elfinder-fullscreen')? elfNode : 'body');
-					// fit to window size
-					$(window).on('resize.'+node.attr('id'), function() {
-						container.css('height', $(window).height());
-					});
 				},
 				errtm;
+			$(base).on('saveAsFail', launch);
 			launch();
 		};
 	
@@ -208,6 +260,194 @@
 	// return editors Array
 	return [
 		{
+			// tui.image-editor - https://github.com/nhnent/tui.image-editor
+			info : {
+				id: 'tuiimgedit',
+				name: 'TUI Image Editor',
+				iconImg: 'img/edit_tuiimgedit.png',
+				dataScheme: true,
+				schemeContent: true,
+				openMaximized: true
+			},
+			// MIME types to accept
+			mimes : ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml', 'image/x-ms-bmp'],
+			// HTML of this editor
+			html : '<div class="elfinder-edit-imageeditor"><canvas></canvas></div>',
+			// called on initialization of elFinder cmd edit (this: this editor's config object)
+			setup : function(opts, fm) {
+				if (fm.UA.ltIE8 || fm.UA.Mobile) {
+					this.disabled = true;
+				} else {
+					this.opts = Object.assign({}, opts.extraOptions.tuiImgEditOpts || {}, {
+						iconsPath : fm.baseUrl + 'img/tui-',
+						theme : {}
+					});
+				}
+			},
+			// Initialization of editing node (this: this editors HTML node)
+			init : function(id, file, content, fm) {
+				this.data('url', content);
+			},
+			load : function(base) {
+				var self = this,
+					fm   = this.fm,
+					dfrd = $.Deferred(),
+					cdns = fm.options.cdns,
+					ver  = 'latest',
+					init = function(editor) {
+						var $base = $(base),
+							opts = self.confObj.opts,
+							iconsPath = opts.iconsPath,
+							iEditor = new editor(base, {
+								includeUI: {
+									loadImage: {
+										path: $base.data('url'),
+										name: self.file.name
+									},
+									theme: Object.assign({
+										// main icons
+										'menu.normalIcon.path': iconsPath + 'icon-b.svg',
+										'menu.normalIcon.name': 'icon-b',
+										'menu.activeIcon.path': iconsPath + 'icon-a.svg',
+										'menu.activeIcon.name': 'icon-a',
+										// submenu icons
+										'submenu.normalIcon.path': iconsPath + 'icon-a.svg',
+										'submenu.normalIcon.name': 'icon-a',
+										'submenu.activeIcon.path': iconsPath + 'icon-c.svg',
+										'submenu.activeIcon.name': 'icon-c',
+									}, opts.theme),
+									initMenu: 'filter',
+									menuBarPosition: 'bottom'
+								},
+								cssMaxWidth: 700,
+								cssMaxHeight: 500
+							}),
+							canvas = $base.find('canvas:first').get(0),
+							quty, qutyTm;
+
+						$base.removeData('url').data('canvas', canvas).data('mime', self.file.mime);
+
+						if (self.file.mime === 'image/jpeg') {
+							$base.data('quality', fm.storage('jpgQuality') || fm.option('jpgQuality'));
+							quty = $('<input type="number" class="ui-corner-all elfinder-resize-quality elfinder-tabstop"/>')
+								.attr('min', '1')
+								.attr('max', '100')
+								.attr('title', '1 - 100')
+								.on('change', function() {
+									var q = quty.val();
+									$base.data('quality', q);
+									qutyTm && cancelAnimationFrame(qutyTm);
+									qutyTm = requestAnimationFrame(function() {
+										canvas.toBlob(function(blob) {
+											blob && quty.next('span').text(' (' + fm.formatSize(blob.size) + ')');
+										}, 'image/jpeg', Math.max(Math.min(q, 100), 1) / 100);
+									});
+								})
+								.val($base.data('quality'))
+							$('<div class="ui-dialog-buttonset"/>')
+								.css('float', 'left')
+								.append(
+									$('<span>').html(fm.i18n('quality') + ' : '), quty, $('<span/>')
+								)
+								.prependTo($base.parent().next());
+						} else if (self.file.mime === 'image/svg+xml') {
+							$base.closest('.ui-dialog').trigger('changeType', {
+								extention: 'png',
+								mime : 'image/png',
+								keepEditor: true
+							});
+						}
+						// wait canvas ready
+						setTimeout(function() {
+							dfrd.resolve(iEditor);
+							if (quty) {
+								quty.trigger('change');
+								iEditor.on('redoStackChanged undoStackChanged', function() {
+									quty.trigger('change');
+								});
+							}
+						}, 100);
+					},
+					loader;
+
+				if (!self.confObj.editor) {
+					loader = $.Deferred();
+					fm.loadCss([
+						cdns.tui + '/tui-color-picker/latest/tui-color-picker.css',
+						cdns.tui + '/tui-image-editor/'+ver+'/tui-image-editor.css'
+					]);
+					if (fm.hasRequire) {
+						require.config({
+							paths : {
+								'fabric/dist/fabric.require' : cdns.fabric16 + '/fabric.require.min',
+								'tui-code-snippet' : cdns.tui + '/tui.code-snippet/latest/tui-code-snippet.min',
+								'tui-color-picker' : cdns.tui + '/tui.code-snippet/latest/tui-color-picker.min',
+								'tui-image-editor' : cdns.tui + '/tui-image-editor/'+ver+'/tui-image-editor.min'
+							}
+						});
+						require(['tui-image-editor'], function(ImageEditor) {
+							loader.resolve(ImageEditor);
+						});
+					} else {
+						fm.loadScript([
+							cdns.fabric16 + '/fabric.min.js',
+							cdns.tui + '/tui.code-snippet/latest/tui-code-snippet.min.js'
+						], function() {
+							fm.loadScript([
+								cdns.tui + '/tui-color-picker/latest/tui-color-picker.min.js'
+							], function() {
+								fm.loadScript([
+									cdns.tui + '/tui-image-editor/'+ver+'/tui-image-editor.js'
+								], function() {
+									loader.resolve(window.tui.ImageEditor);
+								}, {
+									loadType: 'tag'
+								});
+							}, {
+								loadType: 'tag'
+							});
+						}, {
+							loadType: 'tag'
+						});
+					}
+					loader.done(function(editor) {
+						self.confObj.editor = editor;
+						init(editor);
+					});
+				} else {
+					init(self.confObj.editor);
+				}
+				return dfrd;
+			},
+			getContent : function(base) {
+				var editor = this.editor,
+					fm = editor.fm,
+					$base = $(base),
+					quality = $base.data('quality');
+				if (editor.instance) {
+					if ($base.data('mime') === 'image/jpeg') {
+						quality = quality || fm.storage('jpgQuality') || fm.option('jpgQuality');
+						quality = Math.max(0.1, Math.min(1, quality / 100));
+					}
+					return $base.data('canvas').toDataURL($base.data('mime'), quality);
+				}
+			},
+			save : function(base) {
+				var $base = $(base),
+					quality = $base.data('quality'),
+					hash = $base.data('hash'),
+					file;
+				this.instance.deactivateAll();
+				if (typeof quality !== 'undefined') {
+					this.fm.storage('jpgQuality', quality);
+				}
+				if (hash) {
+					file = this.fm.file(hash);
+					$base.data('mime', file.mime);
+				}
+			}
+		},
+		{
 			// Pixlr Editor
 			info : {
 				id : 'pixlreditor',
@@ -215,19 +455,22 @@
 				iconImg : 'img/edit_pixlreditor.png',
 				urlAsContent: true,
 				schemeContent: true,
-				single: true
+				single: true,
+				integrate: {
+					title: 'PIXLR EDITOR',
+					link: 'https://pixlr.com/editor/'
+				}
 			},
 			// MIME types to accept
-			mimes : ['image/jpeg', 'image/png'],
+			mimes : ['image/jpeg', 'image/png', 'image/gif', 'image/x-ms-bmp', 'image/x-pixlr-data'],
 			// HTML of this editor
-			html : '<div style="width:100%;height:300px;max-height:100%;text-align:center;"><img/></div>',
+			html : '<div class="elfinder-edit-imageeditor"><img/></div>',
 			// called on initialization of elFinder cmd edit (this: this editor's config object)
 			setup : function(opts, fm) {
 				pixlrSetup.call(this, opts, fm);
 			},
 			// Initialization of editing node (this: this editors HTML node)
 			init : function(id, file, url, fm) {
-				//initImgTag.call(this, id, file, fm.convAbsUrl(fm.openUrl(file.hash, true)), fm);
 				initImgTag.call(this, id, file, fm.convAbsUrl(url), fm);
 			},
 			// Get data uri scheme (this: this editors HTML node)
@@ -248,12 +491,16 @@
 				iconImg : 'img/edit_pixlrexpress.png',
 				urlAsContent: true,
 				schemeContent: true,
-				single: true
+				single: true,
+				integrate: {
+					title: 'PIXLR EXPRESS',
+					link: 'https://pixlr.com/express/'
+				}
 			},
 			// MIME types to accept
-			mimes : ['image/jpeg'],
+			mimes : ['image/jpeg', 'image/png', 'image/gif'],
 			// HTML of this editor
-			html : '<div style="width:100%;height:300px;max-height:100%;text-align:center;"><img/></div>',
+			html : '<div class="elfinder-edit-imageeditor"><img/></div>',
 			// called on initialization of elFinder cmd edit (this: this editor's config object)
 			setup : function(opts, fm) {
 				pixlrSetup.call(this, opts, fm);
@@ -279,12 +526,17 @@
 				id : 'creativecloud',
 				name : 'Creative Cloud',
 				iconImg : 'img/edit_creativecloud.png',
+				dataScheme: true,
 				schemeContent: true,
-				single: true
+				single: true,
+				integrate: {
+					title: 'Adobe Creative Cloud',
+					link: 'https://www.adobe.io/apis/creativecloud.html'
+				}
 			},
-			mimes : ['image/jpeg', 'image/png'],
+			mimes : ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml', 'image/x-ms-bmp'],
 			// HTML of this editor
-			html : '<div style="width:100%;height:300px;max-height:100%;text-align:center;"><img/></div>',
+			html : '<div class="elfinder-edit-imageeditor"><img/></div>',
 			// called on initialization of elFinder cmd edit (this: this editor's config object)
 			setup : function(opts, fm) {
 				if (fm.UA.ltIE8 || !opts.extraOptions || !opts.extraOptions.creativeCloudApiKey) {
@@ -306,6 +558,7 @@
 				var self = this,
 					fm = this.fm,
 					node = $(base).children('img:first'),
+					dialog = $(base).closest('.ui-dialog'),
 					elfNode = fm.getUI(),
 					dfrd = $.Deferred(),
 					container = $('#elfinder-aviary-container'),
@@ -327,10 +580,6 @@
 								height: $(window).height(),
 								overflow: 'auto'
 							}).hide().appendTo(elfNode.hasClass('elfinder-fullscreen')? elfNode : 'body');
-							// fit to window size
-							$(window).on('resize.'+fm.namespace, function() {
-								container.css('height', $(window).height());
-							});
 							// bind switch fullscreen event
 							elfNode.on('resize.'+fm.namespace, function(e, data) {
 								e.preventDefault();
@@ -348,7 +597,15 @@
 						opts = {
 							apiKey: self.confObj.apiKey,
 							onSave: function(imageID, newURL) {
+								var ext;
 								featherEditor.showWaitIndicator();
+								ext = newURL.replace(/.+\.([^.]+)$/, '$1');
+								if (node.data('ext') !== ext) {
+									node.closest('.ui-dialog').trigger('changeType', {
+										extention: ext,
+										mime : ext2mime[ext]
+									});
+								}
 								node.on('load error', function() {
 										node.data('loading')(true);
 									})
@@ -358,7 +615,11 @@
 								featherEditor.close();
 							},
 							onLoad: onload || function(){},
-							onClose: function() { $(container).hide(); },
+							onClose: function() { 
+								dialog.removeClass(fm.res('class', 'preventback'));
+								fm.toggleMaximize(container, false);
+								$(container).hide();
+							},
 							appendTo: container.get(0),
 							maxSize: 2048,
 							language: getLang()
@@ -371,11 +632,14 @@
 							opts: opts
 						});
 						featherEditor = new Aviary.Feather(opts);
-						container.css('z-index', $(base).closest('.elfinder-dialog').css('z-index'));
 						// return editor instance
 						dfrd.resolve(featherEditor);
+						$(base).on('saveAsFail', launch);
 					},
 					launch = function() {
+						dialog.addClass(fm.res('class', 'preventback'));
+						fm.toggleMaximize(container, true);
+						fm.toFront(container);
 						$(container).show();
 						featherEditor.launch({
 							image: node.attr('id'),
@@ -494,6 +758,9 @@
 							editor.setOptions({
 								mode: 'ace/mode/' + mode
 							});
+							if (dfrd.state() === 'resolved') {
+								dialog.trigger('resize');
+							}
 						});
 						ace.config.loadModule('ace/ext/language_tools', function() {
 							ace.require('ace/ext/language_tools');
@@ -578,6 +845,7 @@
 							opts: {}
 						});
 						
+						//dialog.trigger('resize');
 						dfrd.resolve(editor);
 					};
 
@@ -1089,7 +1357,7 @@
 					uploder = function(loader) {
 						this.upload = function() {
 							return new Promise(function(resolve, reject) {
-								fm.exec('upload', {files: [loader.file]})
+								fm.exec('upload', {files: [loader.file]}, void(0), fm.cwd().hash)
 									.done(function(data){
 										if (data.added && data.added.length) {
 											fm.url(data.added[0].hash, { async: true }).done(function(url) {
@@ -1120,18 +1388,14 @@
 				if (!self.confObj.editor) {
 					loader = $.Deferred();
 					self.fm.loadScript([
-						//fm.options.cdns.ckeditor5 + '/' + mode + '/ckeditor.js'
-						// uses "t/ckeditor5/914" until next release
-						fm.options.cdns.ckeditor5 + mode + '/5c757fcc3e924454bf5f65c806f4a159aaafd293/build/ckeditor.js'
+						fm.options.cdns.ckeditor5 + '/' + mode + '/ckeditor.js'
 					], function(editor) {
 						if (!editor) {
 							editor = window.BalloonEditor || window.InlineEditor || window.ClassicEditor;
 						}
 						if (fm.lang !== 'en') {
 							self.fm.loadScript([
-								//fm.options.cdns.ckeditor5 + '/' + mode + '/translations/' + lang + '.js'
-								// uses "t/ckeditor5/914" until next release
-								fm.options.cdns.ckeditor5 + mode + '/5c757fcc3e924454bf5f65c806f4a159aaafd293/build/translations/' + lang + '.js'
+								fm.options.cdns.ckeditor5 + '/' + mode + '/translations/' + lang + '.js'
 							], function(obj) {
 								loader.resolve(editor);
 							}, {
@@ -1199,7 +1463,7 @@
 					fm   = this.fm,
 					dfrd = $.Deferred(),
 					init = function() {
-						var base = $(textarea).parent(),
+						var base = $(textarea).show().parent(),
 							dlg = base.closest('.elfinder-dialog'),
 							h = base.height(),
 							delta = base.outerHeight(true) - h,
@@ -1213,7 +1477,7 @@
 								h	= height || base.height(),
 								ctrH = 0,
 								areaH;
-							base.find('.mce-container-body:first').children('.mce-toolbar,.mce-toolbar-grp,.mce-statusbar').each(function() {
+							base.find('.mce-container-body:first').children('.mce-top-part,.mce-statusbar').each(function() {
 								ctrH += $(this).outerHeight(true);
 							});
 							areaH = h - ctrH - delta;
@@ -1304,9 +1568,6 @@
 						tinymce.init(opts);
 					};
 				
- 				// impossible launch TineMCE in native fullscreen mode
- 				fm.getUI().hasClass('elfinder-fullscreen-native') && fm.exec('fullscreen');
-				
 				if (!self.confObj.loader) {
 					self.confObj.loader = $.Deferred();
 					$.getScript(fm.options.cdns.tinymce + '/tinymce.min.js', function() {
@@ -1339,7 +1600,12 @@
 				iconImg : 'img/edit_zohooffice.png',
 				cmdCheck : 'ZohoOffice',
 				preventGet: true,
-				hideButtons: true
+				hideButtons: true,
+				syncInterval : 15000,
+				integrate: {
+					title: 'Zoho Office API',
+					link: 'https://www.zoho.com/officeapi/'
+				}
 			},
 			mimes : [
 				'application/msword',
@@ -1462,8 +1728,6 @@
 					xhr = $(ta).data('xhr');
 				if (xhr.state() === 'pending') {
 					xhr.reject();
-				} else {
-					fm.sync(fm.cwd().hash);
 				}
 			}
 		},
@@ -1529,8 +1793,536 @@
 					instance: void(0),
 					opts: {}
 				});
+				textarea.setSelectionRange && textarea.setSelectionRange(0, 0);
+				$(textarea).trigger('focus').show();
 			},
 			save : function(){}
+		},
+		{
+			// File converter with online-convert.com
+			info : {
+				id : 'onlineconvert',
+				name : 'Online Convert',
+				iconImg : 'img/edit_onlineconvert.png',
+				cmdCheck : 'OnlineConvert',
+				preventGet: true,
+				hideButtons: true,
+				single: true,
+				converter: true,
+				integrate: {
+					title: 'ONLINE-CONVERT.COM',
+					link: 'https://online-convert.com'
+				}
+			},
+			mimes : ['*'],
+			html : '<iframe style="width:100%;max-height:100%;border:none;"></iframe>',
+			// setup on elFinder bootup
+			setup : function(opts, fm) {
+				var mOpts = opts.extraOptions.onlineConvert || {maxSize:100,showLink:true};
+				if (mOpts.maxSize) {
+					this.info.maxSize = mOpts.maxSize * 1048576;
+				}
+				this.set = Object.assign({
+					url : 'https://%s.online-convert.com%s?external_url=',
+					conv : {
+						Archive: {'7Z':{}, 'BZ2':{ext:'bz'}, 'GZ':{}, 'ZIP':{}},
+						Audio: {'MP3':{}, 'OGG':{ext:'oga'}, 'WAV':{}, 'WMA':{}, 'AAC':{}, 'AIFF':{ext:'aif'}, 'FLAC':{}, 'M4A':{}, 'MMF':{}, 'OPUS':{ext:'oga'}},
+						Document: {'DOC':{}, 'DOCX':{}, 'HTML':{}, 'ODT':{}, 'PDF':{}, 'PPT':{}, 'PPTX':{}, 'RTF':{}, 'SWF':{}, 'TXT':{}},
+						eBook: {'AZW3':{ext:'azw'}, 'ePub':{}, 'FB2':{ext:'xml'}, 'LIT':{}, 'LRF':{}, 'MOBI':{}, 'PDB':{}, 'PDF':{},'PDF-eBook':{ext:'pdf'}, 'TCR':{}},
+						Hash: {'Adler32':{},  'Apache-htpasswd':{}, 'Blowfish':{}, 'CRC32':{}, 'CRC32B':{}, 'Gost':{}, 'Haval128':{},'MD4':{}, 'MD5':{}, 'RIPEMD128':{}, 'RIPEMD160':{}, 'SHA1':{}, 'SHA256':{}, 'SHA384':{}, 'SHA512':{}, 'Snefru':{}, 'Std-DES':{}, 'Tiger128':{}, 'Tiger128-calculator':{}, 'Tiger128-converter':{}, 'Tiger160':{}, 'Tiger192':{}, 'Whirlpool':{}},
+						Image: {'BMP':{}, 'EPS':{ext:'ai'}, 'GIF':{}, 'EXR':{}, 'ICO':{}, 'JPG':{}, 'PNG':{}, 'SVG':{}, 'TGA':{}, 'TIFF':{ext:'tif'}, 'WBMP':{}, 'WebP':{}},
+						Video: {'3G2':{}, '3GP':{}, 'AVI':{}, 'FLV':{}, 'HLS':{ext:'m3u8'}, 'MKV':{}, 'MOV':{}, 'MP4':{}, 'MPEG-1':{ext:'mpeg'}, 'MPEG-2':{ext:'mpeg'}, 'OGG':{ext:'ogv'}, 'OGV':{}, 'WebM':{}, 'WMV':{}, 'Android':{link:'/convert-video-for-%s',ext:'mp4'}, 'Blackberry':{link:'/convert-video-for-%s',ext:'mp4'}, 'DPG':{link:'/convert-video-for-%s',ext:'avi'}, 'iPad':{link:'/convert-video-for-%s',ext:'mp4'}, 'iPhone':{link:'/convert-video-for-%s',ext:'mp4'}, 'iPod':{link:'/convert-video-for-%s',ext:'mp4'}, 'Nintendo-3DS':{link:'/convert-video-for-%s',ext:'avi'}, 'Nintendo-DS':{link:'/convert-video-for-%s',ext:'avi'}, 'PS3':{link:'/convert-video-for-%s',ext:'mp4'}, 'Wii':{link:'/convert-video-for-%s',ext:'avi'}, 'Xbox':{link:'/convert-video-for-%s',ext:'wmv'}}
+					},
+					catExts : {
+						Hash: 'txt'
+					},
+					link : '<div class="elfinder-edit-onlineconvert-link"><a href="https://www.online-convert.com" target="_blank"><span class="elfinder-button-icon"></span>ONLINE-CONVERT.COM</a></div>',
+					toastWidth : 280,
+					useTabs : ($.fn.tabs && !fm.UA.iOS)? true : false // Can't work on iOS, I don't know why.
+				}, mOpts);
+			},
+			// Prepare on before show dialog
+			prepare : function(base, dialogOpts, file) {
+				var elfNode = base.editor.fm.getUI();
+				$(base).height(elfNode.height());
+				dialogOpts.width = Math.max(dialogOpts.width || 0, elfNode.width() * 0.8);
+			},
+			// Initialization of editing node (this: this editors HTML node)
+			init : function(id, file, dum, fm) {
+				var ta = this,
+					confObj = ta.editor.confObj,
+					set = confObj.set,
+					uiToast = fm.getUI('toast'),
+					idxs = {},
+					allowZip = fm.uploadMimeCheck('application/zip', file.phash),
+					getExt = function(cat, con) {
+						var c;
+						if (set.catExts[cat]) {
+							return set.catExts[cat];
+						}
+						if (set.conv[cat] && (c = set.conv[cat][con])) {
+							return (c.ext || con).toLowerCase();
+						}
+						return con.toLowerCase();
+					},
+					setOptions = function(cat, done) {
+						var type, dfdInit, dfd;
+						if (typeof confObj.api === 'undefined') {
+							dfdInit = fm.request({
+								data: {
+									cmd: 'editor',
+									name: 'OnlineConvert',
+									method: 'init'
+								},
+								preventDefault : true
+							});
+						} else {
+							dfdInit = $.Deferred().resolve({api: confObj.api});
+						}
+						cat = cat.toLowerCase();
+						dfdInit.done(function(data) {
+							confObj.api = data.api;
+							if (confObj.api) {
+								if (cat) {
+									type = '?category=' + cat;
+								} else {
+									type = '';
+									cat = 'all';
+								}
+								if (!confObj.conversions) {
+									confObj.conversions = {};
+								}
+								if (!confObj.conversions[cat]) {
+									dfd = $.getJSON('https://api2.online-convert.com/conversions' + type);
+								} else {
+									dfd = $.Deferred().resolve(confObj.conversions[cat]);
+								}
+								dfd.done(function(d) {
+									confObj.conversions[cat] = d;
+									$.each(d, function(i, o) {
+										btns[set.useTabs? 'children' : 'find']('.onlineconvert-category-' + o.category).children('.onlineconvert-' + o.target).trigger('makeoption', o);
+									});
+									done && done();
+								});
+							}
+						});
+					},
+					btns = (function() {
+						var btns = $('<div/>').on('click', 'button', function() {
+								var b = $(this),
+									opts = b.data('opts') || null,
+									cat = b.closest('.onlineconvert-category').data('cname'),
+									con = b.data('conv');
+								if (confObj.api === true) {
+									api({
+										category: cat,
+										convert: con,
+										options: opts
+									});
+								} else {
+									open(cat, con);
+								}
+							}).on('change', function(e) {
+								var t = $(e.target),
+									p = t.parent(), 
+									b = t.closest('.elfinder-edit-onlineconvert-button').children('button:first'),
+									o = b.data('opts') || {},
+									v = p.data('type') === 'boolean'? t.is(':checked') : t.val();
+								e.stopPropagation();
+								if (v) {
+									if (p.data('type') === 'integer') {
+										v = parseInt(v);
+									}
+									if (p.data('pattern')) {
+										var reg = new RegExp(p.data('pattern'));
+										if (!reg.test(v)) {
+											requestAnimationFrame(function() {
+												fm.error('"' + fm.escape(v) + '" is not match to "/' + fm.escape(p.data('pattern')) + '/"');
+											});
+											v = null;
+										}
+									}
+								}
+								if (v) {
+									o[t.parent().data('optkey')] = v;
+								} else {
+									delete o[p.data('optkey')];
+								}
+								b.data('opts', o);
+							}),
+							ul = $('<ul/>'),
+							oform = function(n, o) {
+								var f = $('<p/>').data('optkey', n).data('type', o.type),
+									checked = '',
+									disabled = '',
+									nozip = false,
+									opts, btn, elm;
+								if (o.description) {
+									f.attr('title', fm.i18n(o.description));
+								}
+								if (o.pattern) {
+									f.data('pattern', o.pattern);
+								}
+								f.append($('<span/>').text(fm.i18n(n) + ' : '));
+								if (o.type === 'boolean') {
+									if (o.default || (nozip = (n === 'allow_multiple_outputs' && !allowZip))) {
+										checked = ' checked';
+										if (nozip) {
+											disabled = ' disabled';
+										}
+										btn = this.children('button:first');
+										opts = btn.data('opts') || {};
+										opts[n] = true;
+										btn.data('opts', opts);
+									}
+									f.append($('<input type="checkbox" value="true"'+checked+disabled+'/>'));
+								} else if (o.enum){
+									elm = $('<select/>').append($('<option value=""/>').text('Select...'));
+									$.each(o.enum, function(i, v) {
+										elm.append($('<option value="'+v+'"/>').text(v));
+									});
+									f.append(elm);
+								} else {
+									f.append($('<input type="text" value=""/>'));
+								}
+								return f;
+							},
+							makeOption = function(o) {
+								var elm = this,
+									b = $('<span class="elfinder-button-icon elfinder-button-icon-preference"/>').on('click', function() {
+										f.toggle();
+									}),
+									f = $('<div class="elfinder-edit-onlinconvert-options"/>').hide();
+								if (o.options) {
+									$.each(o.options, function(k, v) {
+										k !== 'download_password' && f.append(oform.call(elm, k, v));
+									});
+								}
+								elm.append(b, f);
+							},
+							ts = (+new Date()),
+							i = 0;
+						
+						if (!confObj.ext2mime) {
+							confObj.ext2mime = fm.arrayFlip(fm.mimeTypes);
+						}
+						$.each(set.conv, function(t, c) {
+							var cname = t.toLowerCase(),
+								id = 'elfinder-edit-onlineconvert-' + cname + ts,
+								type = $('<div id="' + id + '" class="onlineconvert-category onlineconvert-category-'+cname+'"/>').data('cname', t),
+								cext;
+							$.each(c, function(n, o) {
+								var nl = n.toLowerCase(),
+									ext = getExt(t, n);
+								if (!confObj.ext2mime[ext]) {
+									if (cname === 'audio' || cname === 'image' || cname === 'video') {
+										confObj.ext2mime[ext] = cname + '/x-' + nl;
+									} else {
+										confObj.ext2mime[ext] = 'application/octet-stream';
+									}
+								}
+								if (fm.uploadMimeCheck(confObj.ext2mime[ext], file.phash)) {
+									type.append($('<div class="elfinder-edit-onlineconvert-button onlineconvert-'+nl+'"/>').on('makeoption', function(e, data) {
+										var elm = $(this);
+										if (!elm.children('.elfinder-button-icon-preference').length) {
+											makeOption.call(elm, data);
+										}
+									}).append($('<button/>').text(n).data('conv', n)));
+								}
+							});
+							if (type.children().length) {
+								ul.append($('<li/>').append($('<a/>').attr('href', '#' + id).text(t)));
+								btns.append(type);
+								idxs[cname] = i++;
+							}
+						});
+						if (set.useTabs) {
+							btns.prepend(ul).tabs({
+								beforeActivate: function(e, ui) {
+									setOptions(ui.newPanel.data('cname'));
+								}
+							});
+						} else {
+							$.each(set.conv, function(t) {
+								var tl = t.toLowerCase();
+								btns.append($('<fieldset class="onlineconvert-fieldset-' + tl + '"/>').append($('<legend/>').text(t)).append(btns.children('.onlineconvert-category-' + tl)));
+							});
+						}
+						return btns;
+					})(),
+					ifm = $(this).hide(),
+					select = $('<div/>')
+						.append(
+							btns,
+							$('<div class="elfinder-edit-onlineconvert-bottom-btn"/>').append(
+								$('<button/>')
+									.addClass(fm.UA.iOS? 'elfinder-button-ios-multiline' : '')
+									.html(fm.i18n('convertOn', 'Online-Convert.com'))
+									.on('click', function() {
+										open();
+									})
+							),
+							(set.showLink? $(set.link) : null)
+						)
+						.appendTo(ifm.parent().css({overflow: 'auto'})),
+					spnr = $('<div class="elfinder-edit-spiner elfinder-edit-online-convert"/>')
+						.hide()
+						.css({
+							position: 'absolute',
+							top: '50%',
+							textAlign: 'center',
+							width: '100%',
+							fontSize: '16pt'
+						})
+						.html('<span class="elfinder-edit-loadingmsg">' + fm.i18n('nowLoading') + '</span><span class="elfinder-spinner"/>')
+						.appendTo(ifm.parent()),
+					_url = null,
+					url = function() {
+						if (_url) {
+							return $.Deferred().resolve(_url);
+						} else {
+							spnr.show();
+							return fm.url(file.hash, {
+								async: true,
+								temporary: true
+							}).done(function(url) {
+								_url = url;
+							}).fail(function(error) {
+								error && fm.error(error);
+								ta.elfinderdialog('destroy');
+							}).always(function() {
+								spnr.hide();
+							});
+						}
+					},
+					api = function(opts) {
+						$(ta).data('dfrd', url().done(function(url) {
+							select.fadeOut();
+							setStatus({info: 'Start conversion request.'});
+							fm.request({
+								data: {
+									cmd: 'editor',
+									name: 'OnlineConvert',
+									method: 'api',
+									'args[category]' : opts.category.toLowerCase(),
+									'args[convert]'  : opts.convert.toLowerCase(),
+									'args[options]'  : JSON.stringify(opts.options),
+									'args[source]'   : fm.convAbsUrl(url),
+									'args[filename]' : fm.splitFileExtention(file.name)[0] + '.' + getExt(opts.category, opts.convert),
+									'args[mime]'     : file.mime
+								},
+								preventDefault : true
+							}).done(function(data) {
+								checkRes(data.apires, opts.category, opts.convert);
+							}).fail(function(error) {
+								error && fm.error(error);
+								ta.elfinderdialog('destroy');
+							});
+						}));
+					},
+					checkRes = function(res, cat, con) {
+						var status, err = [];
+						if (res && res.id) {
+							status = res.status;
+							if (status.code === 'failed') {
+								spnr.hide();
+								if (res.errors && res.errors.length) {
+									$.each(res.errors, function(i, o) {
+										o.message && err.push(o.message);
+									});
+								}
+								fm.error(err.length? err : status.info);
+								select.fadeIn();
+							} else if (status.code === 'completed') {
+								upload(res.output);
+							} else {
+								setStatus(status);
+								setTimeout(function() {
+									polling(res.id);
+								}, 1000);
+							}
+						} else {
+							uiToast.appendTo(ta.closest('.ui-dialog'));
+							if (res.message) {
+								fm.toast({
+									msg: fm.i18n(res.message),
+									mode: 'error',
+									timeOut: 5000,
+									width: set.toastWidth,
+									onHidden: function() {
+										uiToast.children().length === 1 && uiToast.appendTo(fm.getUI());
+									}
+								});
+							}
+							fm.toast({
+								msg: fm.i18n('editorConvNoApi'),
+								mode: 'warning',
+								timeOut: 3000,
+								width: set.toastWidth,
+								onHidden: function() {
+									uiToast.children().length === 1 && uiToast.appendTo(fm.getUI());
+									open(cat, con);
+								}
+							});
+						}
+					},
+					setStatus = function(status) {
+						spnr.show().children('.elfinder-edit-loadingmsg').text(status.info);
+					},
+					polling = function(jobid) {
+						fm.request({
+							data: {
+								cmd: 'editor',
+								name: 'OnlineConvert',
+								method: 'api',
+								'args[jobid]': jobid
+							},
+							preventDefault : true
+						}).done(function(data) {
+							checkRes(data.apires);
+						}).fail(function(error) {
+							error && fm.error(error);
+							ta.elfinderdialog('destroy');
+						});
+					},
+					upload = function(output) {
+						var url = '';
+						spnr.hide();
+						if (output && output.length) {
+							ta.elfinderdialog('destroy');
+							$.each(output, function(i, o) {
+								if (o.uri) {
+									url += o.uri + '\n';
+								}
+							});
+							fm.upload({
+								target: file.phash,
+								files: [url],
+								type: 'text'
+							});
+						}
+					},
+					open = function(cat, con) {
+						var link;
+						if (cat && con) {
+							if (set.conv[cat] && set.conv[cat][con] && set.conv[cat][con].link) {
+								link = set.conv[cat][con].link.replace('%s', con);
+							} else {
+								link = cat === 'hash'? ('/' + con + '-generator') : ('/convert-to-' + con);
+							}
+							link = set.url.replace('%s', cat).replace('%s', link);
+						} else {
+							link = set.url.replace('%s', mode + '-conversion').replace('%s', '');
+						}
+						spnr.hide();
+						select.hide();
+						ifm.parent().css({overflow: fm.UA.iOS? 'auto' : 'hidden'});
+						$(ta).data('dfrd', url().done(function(url) {
+							var opts;
+							if (url) {
+								opts = {
+									css: {
+										height: '100%'
+									}
+								};
+								// trigger event 'editEditorPrepare'
+								ta.editor.trigger('Prepare', {
+									node: ta,
+									editorObj: void(0),
+									instance: ifm,
+									opts: opts
+								});
+
+								url = encodeURIComponent(fm.convAbsUrl(url));
+								// need `.replace(/%2520/g, '%252520')` for a bug of online-convert.com
+								if (set['fix%20']) {
+									url = url.replace(/%2520/g, '%252520');
+								}
+								url = link + url;
+								ifm.attr('src', url).show().css(opts.css)
+									.one('load', function() {
+										uiToast.appendTo(ta.closest('.ui-dialog'));
+										fm.toast({
+											msg: fm.i18n('editorConvNeedUpload'),
+											mode: 'info',
+											timeOut: 10000,
+											width: set.toastWidth,
+											onHidden: function() {
+												uiToast.children().length === 1 && uiToast.appendTo(fm.getUI());
+											},
+											button: {
+												text: 'btnYes'
+											}
+										});
+									});
+							} else {
+								data.error && fm.error(data.error);
+								ta.elfinderdialog('destroy');
+							}
+						}));
+					},
+					mode = 'document',
+					cl, m;
+				ifm.parent().addClass('overflow-scrolling-touch');
+				if (m = file.mime.match(/^(audio|image|video)/)) {
+					mode = m[1];
+				}
+				if (set.useTabs) {
+					if (idxs[mode]) {
+						btns.tabs('option', 'active', idxs[mode]);
+					}
+				} else {
+					cl = Object.keys(set.conv).length;
+					$.each(set.conv, function(t) {
+						if (t.toLowerCase() === mode) {
+							setOptions(t, function() {
+								$.each(set.conv, function(t0) {
+									t0.toLowerCase() !== mode && setOptions(t0);
+								});
+							});
+							return false;
+						}
+						cl--;
+					});
+					if (!cl) {
+						$.each(set.conv, function(t) {
+							setOptions(t);
+						});
+					}
+					ifm.parent().scrollTop(btns.children('.onlineconvert-fieldset-' + mode).offset().top);
+				}
+			},
+			load : function() {},
+			getContent : function() {},
+			save : function() {},
+			// Before dialog close
+			beforeclose : function(base) {
+				var dfd = $.Deferred(),
+					ab = 'about:blank';
+				base.src = ab;
+				setTimeout(function() {
+					var src;
+					try {
+						src = base.contentWindow.location.href;
+					} catch(e) {
+						src = null;
+					}
+					if (src === ab) {
+						dfd.resolve();
+					} else {
+						dfd.reject();
+					}
+				}, 100);
+				return dfd;
+			},
+			// On dialog closed
+			close : function(ta) {
+				var fm = this.fm,
+					dfrd = $(ta).data('dfrd');
+				if (dfrd && dfrd.state() === 'pending') {
+					dfrd.reject();
+				}
+			}
 		}
 	];
 }, window.elFinder));

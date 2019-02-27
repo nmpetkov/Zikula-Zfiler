@@ -19,6 +19,7 @@ jQuery(document).ready(function() {
         commandsOptions: {
             getfile: { multiple: {{if $select_multiple}}true{{else}}false{{/if}} },
             help: { view : ['about', 'shortcuts'] },
+            edit: { extraOptions: { creativeCloudApiKey: '6e62687b643a413cbb6aedf72ced95e3' } },
             quicklook: { googleDocsMimes : ['application/pdf', 'image/tiff', 'application/vnd.ms-office', 'application/msword', 'application/vnd.ms-word', 'application/vnd.ms-excel', 'application/vnd.ms-powerpoint', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'] }
         },
         closeOnEditorCallback: true,
